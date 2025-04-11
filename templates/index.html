@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Farm Monitor</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>🌾 Farm Monitoring Dashboard</h1>
+
+    {% if latest %}
+        <p><strong>Temperature:</strong> {{ latest[0] }} °C</p>
+        <p><strong>Soil Moisture:</strong> {{ latest[1] }}</p>
+        <p><strong>Timestamp:</strong> {{ latest[2] }}</p>
+    {% else %}
+        <p>No data available.</p>
+    {% endif %}
+
+    <h2>🚨 Alerts</h2>
+    {% if alerts %}
+        <ul>
+            {% for alert in alerts %}
+                <li>{{ alert[1] }} — {{ alert[0] }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No alerts yet.</p>
+    {% endif %}
+</body>
+</html>
