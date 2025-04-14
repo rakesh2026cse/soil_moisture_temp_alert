@@ -5,7 +5,6 @@ import time
 from datetime import datetime
 from config import *
 
-GPIO.setmode(GPIO.BCM)
 GPIO.setup(SOIL_SENSOR_PIN, GPIO.IN)
 
 DHT_SENSOR = Adafruit_DHT.DHT11
