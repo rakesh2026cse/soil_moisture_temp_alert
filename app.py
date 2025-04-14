@@ -9,11 +9,9 @@ def home():
     conn = sqlite3.connect(DB_NAME)
     c = conn.cursor()
 
-    # Fetch latest reading
     c.execute("SELECT temperature, moisture_status, timestamp FROM sensor_data ORDER BY id DESC LIMIT 1")
     latest = c.fetchone()
 
-    # Fetch last 5 alerts
     c.execute("SELECT message, timestamp FROM alerts ORDER BY id DESC LIMIT 5")
     alerts = c.fetchall()
 
@@ -21,4 +19,4 @@ def home():
     return render_template("index.html", latest=latest, alerts=alerts)
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0")  # Accessible from other devices on network
+    app.run(debug=True) 
