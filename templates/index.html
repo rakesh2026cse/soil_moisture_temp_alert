@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <h1>🌾 Farm Monitoring Dashboard</h1>
+    <h1>Farm Monitoring Dashboard</h1>
 
     {% if latest %}
         <p><strong>Temperature:</strong> {{ latest[0] }} °C</p>
@@ -15,7 +15,7 @@
         <p>No data available.</p>
     {% endif %}
 
-    <h2>🚨 Alerts</h2>
+    <h2> Alerts</h2>
     {% if alerts %}
         <ul>
             {% for alert in alerts %}
