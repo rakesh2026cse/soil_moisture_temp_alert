@@ -32,7 +32,7 @@ def init_db():
     conn.close()
 
 def read_sensors():
-    moisture = GPIO.input(SOIL_SENSOR_PIN)  # 0 = dry, 1 = wet
+    moisture = GPIO.input(SOIL_SENSOR_PIN)  
     humidity, temperature = Adafruit_DHT.read_retry(DHT_SENSOR, TEMP_SENSOR_PIN)
     return temperature, "Dry" if moisture == 0 else "Wet"
 
@@ -44,12 +44,11 @@ def insert_data(temp, moisture_status):
     c.execute("INSERT INTO sensor_data (temperature, moisture_status, timestamp) VALUES (?, ?, ?)",
               (temp, moisture_status, timestamp))
 
-    # Trigger alerts
     if moisture_status == "Dry":
-        msg = f"🌱 Soil is dry. Irrigation needed at {timestamp}"
+        msg = f" Soil is dry. Irrigation needed at {timestamp}"
         c.execute("INSERT INTO alerts (message, timestamp) VALUES (?, ?)", (msg, timestamp))
     elif temp is not None and temp > TEMP_THRESHOLD:
-        msg = f"🔥 High temperature alert ({temp:.1f}°C) at {timestamp}"
+        msg = f" High temperature alert ({temp:.1f}°C) at {timestamp}"
         c.execute("INSERT INTO alerts (message, timestamp) VALUES (?, ?)", (msg, timestamp))
 
     conn.commit()
